@@ -3,7 +3,12 @@ package ru.job4j;
 import java.util.*;
 
 public class Handler {
-
+    /**
+     * Class User is used for storing information about vertex of the users graph
+     * Method getUsersAndLinks find an adjacency list for each user
+     * Method getUsersAndLinks return a list of users which merged by the same emails (it uses breadth-first search).
+     * Method mergeAll finds all merged users and put them into the map
+     */
     private static class User {
         private String name;
         private Set<User> linkedUsers;
@@ -62,9 +67,7 @@ public class Handler {
         result.add(user);
         while (!queue.isEmpty()) {
             User curUser = queue.remove();
-            Iterator<User> it = curUser.getLinkedUsers().iterator();
-            while (it.hasNext()) {
-                User linkedUser = it.next();
+            for (User linkedUser : curUser.getLinkedUsers()) {
                 if (!linkedUser.isMerged()) {
                     linkedUser.setMerged(true);
                     queue.add(linkedUser);
@@ -83,9 +86,7 @@ public class Handler {
                 throw new IllegalArgumentException("User name or email's set can not be null!");
             }
             User user = new User(entry.getKey(), new LinkedHashSet<>());
-            Iterator<String> emails = entry.getValue().iterator();
-            while (emails.hasNext()) {
-                String email = emails.next();
+            for (String email : entry.getValue()) {
                 if (email == null) {
                     throw new IllegalArgumentException("Email can not be null!");
                 }

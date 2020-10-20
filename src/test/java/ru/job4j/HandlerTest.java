@@ -140,4 +140,34 @@ public class HandlerTest {
         assertThat(Handler.mergeAll(inputMap), is(expectedMap));
     }
 
+    @Test
+    public void whenAllUsersAreEqual() {
+        Set<String> emails1 = new HashSet<>(Arrays.asList("email1", "email2", "email3"));
+        Set<String> emails2 = new HashSet<>(Arrays.asList("email1", "email2", "email3"));
+        Set<String> emails3 = new HashSet<>(Arrays.asList("email1", "email2", "email3"));
+        Map<String, Set<String>> inputMap = new LinkedHashMap<>();
+        inputMap.put("user1", emails1);
+        inputMap.put("user2", emails2);
+        inputMap.put("user3", emails3);
+        Map<String, Set<String>> expectedMap = new LinkedHashMap<>() {{
+            put("user1", Set.of("email1", "email2", "email3"));
+        }};
+        assertThat(Handler.mergeAll(inputMap), is(expectedMap));
+    }
+
+    @Test
+    public void whenAllUsersHaveTheSameEmail() {
+        Set<String> emails1 = new HashSet<>(Arrays.asList("email1", "email2", "email3"));
+        Set<String> emails2 = new HashSet<>(Arrays.asList("email4", "email2", "email5"));
+        Set<String> emails3 = new HashSet<>(Arrays.asList("email6", "email2", "email7"));
+        Map<String, Set<String>> inputMap = new LinkedHashMap<>();
+        inputMap.put("user1", emails1);
+        inputMap.put("user2", emails2);
+        inputMap.put("user3", emails3);
+        Map<String, Set<String>> expectedMap = new LinkedHashMap<>() {{
+            put("user1", Set.of("email1", "email2", "email3", "email4", "email5", "email6", "email7"));
+        }};
+        assertThat(Handler.mergeAll(inputMap), is(expectedMap));
+    }
+
 }

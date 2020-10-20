@@ -16,6 +16,7 @@ public class App {
         app.readInputFile(args[0]);
         app.outputMap = Handler.mergeAll(app.inputMap);
         app.writeResult();
+        System.out.println("Done. The results can be found inside the file result.txt .");
     }
 
     private void writeResult() {
@@ -29,7 +30,7 @@ public class App {
             }
             writer.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
@@ -51,7 +52,7 @@ public class App {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
