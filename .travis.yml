@@ -18,3 +18,6 @@ notifications:
       -masterenko.as@gmail.com
     on_success: never # default: change
     on_failure: always # defa,ult: always
+env:
+  global:
+    - CODECOV_TOKEN="7c40cf0b-3066-4e78-8fa9-2fc81dce5dcb"
