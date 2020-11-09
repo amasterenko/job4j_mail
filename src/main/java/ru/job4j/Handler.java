@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Handler {
     /**
-     * Class User is used for storing information about vertex of user's graph
-     * Method getUsersAndLinks fills the "adjacency list" linkedUsers for each user
+     * Class User is used to store information about vertex of user's graph.
+     * Method getUsersAndLinks fills the "adjacency list" linkedUsers for each user.
      * Method mergeByUser returns a list of users merged by the same emails (it uses breadth-first search).
-     * Method mergeAll finds all merged users and put them into the output map
+     * Method mergeAll finds all merged users and puts them into the output map.
      */
     private static class User {
         private String name;
