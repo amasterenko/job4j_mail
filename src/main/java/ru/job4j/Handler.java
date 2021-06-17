@@ -2,16 +2,16 @@ package ru.job4j;
 
 import java.util.*;
 
+/**
+ * Class implements main functionality.
+ */
 public class Handler {
     /**
-     * Class User is used to store information about vertex of user's graph.
-     * Method getUsersAndLinks fills the "adjacency list" linkedUsers for each user.
-     * Method mergeByUser returns a list of users merged by the same emails (it uses breadth-first search).
-     * Method mergeAll finds all merged users and puts them into the output map.
+     * Stores information about vertex of user's graph.
      */
     private static class User {
-        private String name;
-        private Set<User> linkedUsers;
+        private final String name;
+        private final Set<User> linkedUsers;
         boolean isMerged;
 
         public User(String name, Set<User> linkedUsers) {
@@ -41,6 +41,11 @@ public class Handler {
         }
     }
 
+    /**
+     * Finds all merged users and puts them into the output map.
+     * @param inputMap input data, a map of users and a set of their emails.
+     * @return output data, a map of users and a set of their emails.
+     */
     public static Map<String, Set<String>> mergeAll(Map<String, Set<String>> inputMap) {
         Map<String, Set<String>> outputMap = new LinkedHashMap<>();
         Set<User> users = getUsersAndLinks(inputMap);
@@ -59,6 +64,11 @@ public class Handler {
         return outputMap;
     }
 
+    /**
+     * Returns a list of users merged by the same emails. Method uses breadth-first search.
+     * @param user target user.
+     * @return list of merged users.
+     */
     private static List<User> mergeByUser(User user) {
         Queue<User> queue = new LinkedList<>();
         List<User> result = new ArrayList<>();
@@ -78,6 +88,11 @@ public class Handler {
         return result;
     }
 
+    /**
+     * Fills the "adjacency list" linkedUsers for each user.
+     * @param inputMap input data - user and a set of their emails.
+     * @return "adjacency list" as a set.
+     */
     private static Set<User> getUsersAndLinks(Map<String, Set<String>> inputMap) {
         Set<User> setUsers = new LinkedHashSet<>();
         Map<String, User> emailToUser = new LinkedHashMap<>();
