@@ -89,9 +89,9 @@ public class Handler {
     }
 
     /**
-     * Fills the "adjacency list" linkedUsers for each user.
-     * @param inputMap input data - user and a set of their emails.
-     * @return "adjacency list" as a set.
+     * Fills the "adjacency list" (linkedUsers field) for each user.
+     * @param inputMap input data - a map of user and the set of their emails.
+     * @return set of User objects with filled adjacency lists.
      */
     private static Set<User> getUsersAndLinks(Map<String, Set<String>> inputMap) {
         Set<User> setUsers = new LinkedHashSet<>();
