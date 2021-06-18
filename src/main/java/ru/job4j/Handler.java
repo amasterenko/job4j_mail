@@ -43,8 +43,8 @@ public class Handler {
 
     /**
      * Finds all merged users and puts them into the output map.
-     * @param inputMap input data, a map of users and a set of their emails.
-     * @return output data, a map of users and a set of their emails.
+     * @param inputMap, a map with user's name and their emails.
+     * @return a map with merged user's name and their emails.
      */
     public static Map<String, Set<String>> mergeAll(Map<String, Set<String>> inputMap) {
         Map<String, Set<String>> outputMap = new LinkedHashMap<>();
@@ -98,12 +98,12 @@ public class Handler {
         Map<String, User> emailToUser = new LinkedHashMap<>();
         for (Map.Entry<String, Set<String>> entry: inputMap.entrySet()) {
             if (entry.getKey() == null || entry.getValue() == null) {
-                throw new IllegalArgumentException("User name or email's set can not be null!");
+                throw new IllegalArgumentException("User name or email's set cannot be null!");
             }
             User user = new User(entry.getKey(), new LinkedHashSet<>());
             for (String email : entry.getValue()) {
                 if (email == null) {
-                    throw new IllegalArgumentException("Email can not be null!");
+                    throw new IllegalArgumentException("Email cannot be null!");
                 }
                 User existedUser = emailToUser.putIfAbsent(email, user);
                 if (existedUser != null) {
