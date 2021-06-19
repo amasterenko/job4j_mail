@@ -3,11 +3,11 @@ package ru.job4j;
 import java.util.*;
 
 /**
- * Class implements main functionality.
+ * Class implements the main functionality.
  */
 public class Handler {
     /**
-     * Stores information about vertex of user's graph.
+     * Stores information about a vertex of the users graph.
      */
     private static class User {
         private final String name;
@@ -48,17 +48,21 @@ public class Handler {
      */
     public static Map<String, Set<String>> mergeAll(Map<String, Set<String>> inputMap) {
         Map<String, Set<String>> outputMap = new LinkedHashMap<>();
+        /*get "adjacency list"*/
         Set<User> users = getUsersAndLinks(inputMap);
         Iterator<User> it = users.iterator();
         while (it.hasNext()) {
             User user = it.next();
             List<User> mergedUsers = mergeByUser(user);
             Set<String> emails = new LinkedHashSet<>();
+            /*collect all the emails from the merged users*/
             for (User u: mergedUsers) {
                 emails.addAll(inputMap.get(u.getName()));
+                /*delete the already merged user from the initial list of users*/
                 users.remove(u);
             }
             outputMap.put(user.name, emails);
+            /*get new iterator from the initial list of users*/
             it = users.iterator();
         }
         return outputMap;
@@ -67,7 +71,7 @@ public class Handler {
     /**
      * Returns a list of users merged by the same emails. Method uses breadth-first search.
      * @param user target user.
-     * @return list of merged users.
+     * @return list of merged users ("component" in graph theory).
      */
     private static List<User> mergeByUser(User user) {
         Queue<User> queue = new LinkedList<>();
@@ -89,9 +93,9 @@ public class Handler {
     }
 
     /**
-     * Fills the "adjacency list" (linkedUsers field) for each user.
-     * @param inputMap input data - a map of user and the set of their emails.
-     * @return set of User objects with filled adjacency lists.
+     * Fills the "adjacency list" - set of users with filled linkedUsers field.
+     * @param inputMap input data - map of users and their emails.
+     * @return "adjacency list" - set of users, each user contains their adjacent users.
      */
     private static Set<User> getUsersAndLinks(Map<String, Set<String>> inputMap) {
         Set<User> setUsers = new LinkedHashSet<>();
